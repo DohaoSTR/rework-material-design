@@ -4,8 +4,151 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DemoWPF"
+
+        xmlns:custom="clr-namespace:DemoWPF.View.Styles.TextInputs"
+        xmlns:wpf="http://materialdesigninxaml.net/winfx/xaml/themes"
+        
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-    </Grid>
+        Title="MainWindow" 
+        Height="1000" 
+        x:Name="MyWindow"
+        Width="800">
+  <Border Background="#eff2f7">
+    <StackPanel Orientation="Vertical">
+      <custom:CustomMaskedTextBox Width="300"
+                                        Height="auto"
+                                        Margin="25"
+                                        Style="{StaticResource CustomMaskedTextBoxBase}"
+                                        Hint="Имя"
+                                        TextWrapping="NoWrap"
+                                        Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <custom:CustomMaskedTextBox.HelpButtons>
+          <wpf:HelpButton Kind="ContentPaste"
+                                    Command="{Binding PasteNameCommand}"
+                                    CommandParameter="false"
+                                    ToolTipText="Кнопка «Вставить имя»"/>
+          <wpf:HelpButton Kind="ContentCopy"
+                                    Command="{Binding CopyNameCommand}"
+                                    ToolTipText="Кнопка «Скопировать имя»"/>
+        </custom:CustomMaskedTextBox.HelpButtons>
+      </custom:CustomMaskedTextBox>
+
+      <custom:CustomMaskedTextBox Width="300"
+                                        Height="auto"
+                                        Margin="25"
+                                        Style="{StaticResource CustomMaskedTextBoxBase}"
+                                        Hint="Дата"
+                                        Mask="99/99/9999"
+                                        Text="{Binding LongDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <custom:CustomMaskedTextBox.HelpButtons>
+          <wpf:HelpButton Kind="ClipboardTextClock"
+                            Command="{Binding PasteCurrentLongDateCommand}"
+                            ToolTipText="Кнопка «Вставить текущую дату»"/>
+        </custom:CustomMaskedTextBox.HelpButtons>
+      </custom:CustomMaskedTextBox>
+
+      <custom:CustomMaskedTextBox Width="300"
+                                        Height="auto"
+                                        Margin="25"
+                                        Style="{StaticResource CustomMaskedTextBoxBase}"
+                                        Hint="Дата"
+                                        Mask="99/99"
+                                        Text="{Binding ShortDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <custom:CustomMaskedTextBox.HelpButtons>
+          <wpf:HelpButton Kind="ClipboardTextClock"
+                            Command="{Binding PasteCurrentShortDateCommand}"
+                            ToolTipText="Кнопка «Вставить текущую дату»"/>
+        </custom:CustomMaskedTextBox.HelpButtons>
+      </custom:CustomMaskedTextBox>
+
+      <custom:CustomMaskedTextBox Width="300"
+                                        Height="auto"
+                                        Margin="25"
+                                        Style="{StaticResource CustomMaskedTextBoxBase}"
+                                        Hint="Номер телефона"
+                                        Mask="+9 (999)-999-9999"
+                                        Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+        <custom:CustomMaskedTextBox.HelpButtons>
+          <wpf:HelpButton Kind="ContentPaste"
+                            Command="{Binding PastePhoneNumberCommand}"
+                            ToolTipText="Кнопка «Вставить номер телефона»"/>
+          <wpf:HelpButton Kind="ContentCopy"
+                            Command="{Binding CopyPhoneNumberCommand}"
+                            ToolTipText="Кнопка «Скопировать номер телефона»"/>
+        </custom:CustomMaskedTextBox.HelpButtons>
+      </custom:CustomMaskedTextBox>
+
+      <custom:CustomMaskedTextBox Width="300"
+                                        Height="auto"
+                                        Margin="25"
+                                        Style="{StaticResource CustomMaskedTextBoxBase}"
+                                        TextWrapping="NoWrap"
+                                        MaxLength="17"
+                                        Hint="VIN"
+                                        Text="{Binding VIN, Mode=TwoWay, 
+                                        UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}">
+        <custom:CustomMaskedTextBox.HelpButtons>
+          <wpf:HelpButton Kind="ContentPaste"
+                            Command="{Binding PasteVINCommand}"
+                            CommandParameter="false"
+                            ToolTipText="Кнопка «Вставить VIN»"/>
+          <wpf:HelpButton Kind="ContentCopy"
+                            Command="{Binding CopyVINCommand}"
+                            ToolTipText="Кнопка «Скопировать VIN»"/>
+        </custom:CustomMaskedTextBox.HelpButtons>
+      </custom:CustomMaskedTextBox>
+
+      <custom:CustomComboBox Width="300"
+                                   Height="auto"
+                                   Margin="25"
+                                   IsEditable="True"
+                                   Style="{StaticResource CustomComboBoxBase}"
+                                   Hint="Модель"
+                                   wpf:TextFieldAssist.SuffixText="$"
+                                   Text="{Binding FirstSelectedModel, 
+                                   UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, 
+                                   ValidatesOnNotifyDataErrors=True}"
+                                   ItemsSource="{Binding Models}">
+        <custom:CustomComboBox.HelpButtons>
+          <wpf:HelpButton Kind="ContentPaste"
+                            Command="{Binding PasteFirstSelectedModelCommand}"
+                            ToolTipText="Кнопка «Вставить модель»"/>
+          <wpf:HelpButton Kind="ContentCopy"
+                            Command="{Binding CopyFirstSelectedModelCommand}"
+                            ToolTipText="Кнопка «Скопировать модель»"/>
+        </custom:CustomComboBox.HelpButtons>
+      </custom:CustomComboBox>
+
+      <custom:AutoCompleteSuggestBox Width="300"
+                                           Height="auto"
+                                           Margin="25"
+                                           Style="{StaticResource AutoCompleteSuggestBoxBase}"
+                                           Hint="Модель"
+                                           TextWrapping="NoWrap"
+                                           wpf:TextFieldAssist.SuffixText="$"
+                                           Text="{Binding SecondSelectedModel, 
+                                           UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, 
+                                           ValidatesOnNotifyDataErrors=True}"
+                                           ItemsSource="{Binding Models}">
+        <custom:AutoCompleteSuggestBox.HelpButtons>
+          <wpf:HelpButton Kind="ContentPaste"
+                            Command="{Binding PasteSecondSelectedModelCommand}"
+                            ToolTipText="Кнопка «Вставить модель»"/>
+          <wpf:HelpButton Kind="ContentCopy"
+                            Command="{Binding CopySecondSelectedModelCommand}"
+                            ToolTipText="Кнопка «Скопировать модель»"/>
+        </custom:AutoCompleteSuggestBox.HelpButtons>
+      </custom:AutoCompleteSuggestBox>
+
+      <custom:CustomMaskedTextBox Width="300"
+                                        Height="auto"
+                                        Margin="25"
+                                        Style="{StaticResource CustomMaskedTextBoxBase}"
+                                        Hint="Цена"
+                                        TextWrapping="NoWrap"
+                                        wpf:TextFieldAssist.SuffixText="₽"
+                                        Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+      </custom:CustomMaskedTextBox>
+    </StackPanel>
+  </Border>
 </Window>
