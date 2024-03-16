@@ -8,4 +8,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\MaterialDesignInXamlToolkit-master\MaterialDesignColors.Wpf\MaterialDesignColors.Wpf.csproj" />
+    <ProjectReference Include="..\..\MaterialDesignInXamlToolkit-master\MaterialDesignThemes.Wpf\MaterialDesignThemes.Wpf.csproj" />
+  </ItemGroup>
+
 </Project>
